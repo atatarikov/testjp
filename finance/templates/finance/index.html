@@ -1,0 +1,300 @@
+{% extends 'finance/base.html' %}
+{% block content %}
+    <h1>
+        <center>{{ title }}{{ add_title_text }}</center>
+    </h1>
+    {% if form_filter %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form_filter }}
+        </div>
+        <center>
+            <button type="submit" class="btn btn-info">Отфильтровать</button>
+        </center>
+    </form>
+    </br>
+    {% endif %}
+    <table class="table table-striped small">
+        <thead align="center">
+        <tr>
+            <th>Контрагент</th>
+            <th>Договор</th>
+            <th>№ дог.</th>
+            <th>Дата</th>
+            <th>Сумма дог.</th>
+            <th>Опл.на тек.</th>
+            <th>Ост.опл.</th>
+            {% if mounth_int == 1 %}
+                <th class="table-success">янв-{{year_now}}</th>
+            {% else %}
+                <th>янв-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 2 %}
+                <th class="table-success">фев-{{year_now}}</th>
+            {% else %}
+                <th>фев-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 3 %}
+                <th class="table-success">мар-{{year_now}}</th>
+            {% else %}
+                <th>мар-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 4 %}
+                <th class="table-success">апр-{{year_now}}</th>
+            {% else %}
+                <th>апр-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 5 %}
+                <th class="table-success">май-{{year_now}}</th>
+            {% else %}
+                <th>май-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 6 %}
+                <th class="table-success">июн-{{year_now}}</th>
+            {% else %}
+                <th>июн-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 7 %}
+                <th class="table-success">июл-{{year_now}}</th>
+            {% else %}
+                <th>июл-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 8 %}
+                <th class="table-success">авг-{{year_now}}</th>
+            {% else %}
+                <th>авг-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 9 %}
+                <th class="table-success">сен-{{year_now}}</th>
+            {% else %}
+                <th>сен-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 10 %}
+                <th class="table-success">окт-{{year_now}}</th>
+            {% else %}
+                <th>окт-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 11 %}
+                <th class="table-success">ноя-{{year_now}}</th>
+            {% else %}
+                <th>ноя-{{year_now}}</th>
+            {% endif %}
+            {% if mounth_int == 12 %}
+                <th class="table-success">дек-{{year_now}}</th>
+            {% else %}
+                <th>дек-{{year_now}}</th>
+            {% endif %}
+        {% if mounth_int == 13 %}
+                <th class="table-success">янв-{{year_next}}</th>
+            {% else %}
+                <th>янв-{{year_next}}</th>
+            {% endif %}
+            {% if mounth_int == 14 %}
+                <th class="table-success">фев-{{year_next}}</th>
+            {% else %}
+                <th>фев-{{year_next}}</th>
+            {% endif %}
+            {% if mounth_int == 15 %}
+                <th class="table-success">мар-{{year_next}}</th>
+            {% else %}
+                <th>мар-{{year_next}}</th>
+            {% endif %}
+            <th>весь-{{year_next}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for el in data %}
+            <tr>
+                <td>{{ el.counterparty }}</td>
+                <td>{{ el.contract }}</td>
+                <td>{{ el.contract_number }}</td>
+                <td>{{ el.contract_data }}</td>
+                {% if el.sum_incorrect %}
+                    <td class="table-danger">{{ el.contract_sum }}</td>
+                {% else %}
+                    <td>{{ el.contract_sum }}</td>
+                {% endif %}
+            <td>{{ el.now }}</td>
+            <td>{{ el.saldo }}</td>
+                {% if mounth_int == 1 %}
+                    <th class="table-success">{{ el.1 }}<br><i>{{ el.1_ }}</th>
+                {% else %}
+                    <td>{{ el.1 }}<br><i>{{ el.1_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 2 %}
+                    <th class="table-success">{{ el.2 }}<br><i>{{ el.2_ }}</th>
+                {% else %}
+                    <td>{{ el.2 }}<br><i>{{ el.2_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 3 %}
+                    <th class="table-success">{{ el.3 }}<br><i>{{ el.3_ }}</th>
+                {% else %}
+                    <td>{{ el.3 }}<br><i>{{ el.3_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 4 %}
+                    <th class="table-success">{{ el.4 }}<br><i>{{ el.4_ }}</th>
+                {% else %}
+                    <td>{{ el.4 }}<br><i>{{ el.4_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 5 %}
+                    <th class="table-success">{{ el.5 }}<br><i>{{ el.5_ }}</th>
+                {% else %}
+                    <td>{{ el.5 }}<br><i>{{ el.5_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 6 %}
+                    <th class="table-success">{{ el.6 }}<br><i>{{ el.6_ }}</th>
+                {% else %}
+                    <td>{{ el.6 }}<br><i>{{ el.6_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 7 %}
+                    <th class="table-success">{{ el.7 }}<br><i>{{ el.7_ }}</th>
+                {% else %}
+                    <td>{{ el.7 }}<br><i>{{ el.7_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 8 %}
+                    <th class="table-success">{{ el.8 }}<br><i>{{ el.8_ }}</th>
+                {% else %}
+                    <td>{{ el.8 }}<br><i>{{ el.8_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 9 %}
+                    <th class="table-success">{{ el.9 }}<br><i>{{ el.9_ }}</th>
+                {% else %}
+                    <td>{{ el.9 }}<br><i>{{ el.9_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 10 %}
+                    <th class="table-success">{{ el.10 }}<br><i>{{ el.10_ }}</th>
+                {% else %}
+                    <td>{{ el.10 }}<br><i>{{ el.10_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 11 %}
+                    <th class="table-success">{{ el.11 }}<br><i>{{ el.11_ }}</th>
+                {% else %}
+                    <td>{{ el.11 }}<br><i>{{ el.11_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 12 %}
+                    <th class="table-success">{{ el.12 }}<br><i>{{ el.12_ }}</th>
+                {% else %}
+                    <td>{{ el.12 }}<br><i>{{ el.12_ }}</i></td>
+                {% endif %}
+            {% if mounth_int == 13 %}
+                    <th class="table-success">{{ el.13 }}<br><i>{{ el.13_ }}</th>
+                {% else %}
+                    <td>{{ el.13 }}<br><i>{{ el.13_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 14 %}
+                    <th class="table-success">{{ el.14 }}<br><i>{{ el.14_ }}</th>
+                {% else %}
+                    <td>{{ el.14 }}<br><i>{{ el.14_ }}</i></td>
+                {% endif %}
+                {% if mounth_int == 15 %}
+                    <th class="table-success">{{ el.15 }}<br><i>{{ el.15_ }}</th>
+                {% else %}
+                    <td>{{ el.15 }}<br><i>{{ el.15_ }}</i></td>
+                {% endif %}
+                <td>{{ el.next }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>{{ data_sum.sum_contract_sum }}</b></td>
+            <td><b>{{ data_sum.sum_now }}</b></td>
+            <td><b>{{ data_sum.sum_saldo }}</b></td>
+            {% if mounth_int == 1 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_1 }}<br><i>{{ data_sum.sum_1_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_1 }}<br><i>{{ data_sum.sum_1_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 2 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_2 }}<br><i>{{ data_sum.sum_2_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_2 }}<br><i>{{ data_sum.sum_2_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 3 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_3 }}<br><i>{{ data_sum.sum_3_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_3 }}<br><i>{{ data_sum.sum_3_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 4 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_4 }}<br><i>{{ data_sum.sum_4_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_4 }}<br><i>{{ data_sum.sum_4_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 5 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_5 }}<br><i>{{ data_sum.sum_5_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_5 }}<br><i>{{ data_sum.sum_5_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 6 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_6 }}<br><i>{{ data_sum.sum_6_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_6 }}<br><i>{{ data_sum.sum_6_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 7 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_7 }}<br><i>{{ data_sum.sum_7_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_7 }}<br><i>{{ data_sum.sum_7_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 8 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_8 }}<br><i>{{ data_sum.sum_8_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_8 }}<br><i>{{ data_sum.sum_8_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 9 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_9 }}<br><i>{{ data_sum.sum_9_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_9 }}<br><i>{{ data_sum.sum_9_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 10 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_10 }}<br><i>{{ data_sum.sum_10_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_10 }}<br><i>{{ data_sum.sum_10_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 11 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_11 }}<br><i>{{ data_sum.sum_11_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_11 }}<br><i>{{ data_sum.sum_11_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 12 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_12 }}<br><i>{{ data_sum.sum_12_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_12 }}<br><i>{{ data_sum.sum_12_ }}</i></b></td>
+            {% endif %}
+{% if mounth_int == 13 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_13 }}<br><i>{{ data_sum.sum_13_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_13 }}<br><i>{{ data_sum.sum_13_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 14 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_14 }}<br><i>{{ data_sum.sum_14_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_14 }}<br><i>{{ data_sum.sum_14_ }}</i></b></td>
+            {% endif %}
+            {% if mounth_int == 15 %}
+                <td class="table-success">
+                    <b>{{ data_sum.sum_15 }}<br><i>{{ data_sum.sum_15_ }}</i><br>{{ data_sum.sum_delta }}</b></td>
+            {% else %}
+                <td><b>{{ data_sum.sum_15 }}<br><i>{{ data_sum.sum_15_ }}</i></b></td>
+            {% endif %}
+            <td><b>{{ data_sum.sum_next }}</b></td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

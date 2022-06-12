@@ -1,0 +1,19 @@
+{% extends 'finance/base.html' %}
+{% load static %}
+{% block content %}
+    <h1>
+        <center>{{ title }}</center>
+    </h1>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <div class="float-right">
+            {{ buttons_add_edit|safe }}
+        </div>
+    </form>
+    {{ error }}
+<script type="text/javascript" src={% static "js/default_add_edit.js" %}></script>
+{% endblock %}

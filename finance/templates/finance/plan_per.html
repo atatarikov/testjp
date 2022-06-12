@@ -1,0 +1,67 @@
+{% extends 'finance/base.html' %}
+{% load static %}
+{% block content %}
+    <h1>
+        <center>ПЛАН ПЛАТЕЖЕЙ ПО ДНЯМ ЗА ПЕРИОД</center>
+    </h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <label>Дата начала:</label>
+                    {{form.date_start}}
+                </div>
+                <div class="col">
+                    <label>Дата окончания:</label>
+                    {{form.date_stop}}
+                </div>
+            </div>
+        </div>
+        <center>
+            <button type="submit" class="btn btn-info">Сформировать</button>
+        </center>
+    </form>
+    </br>
+    <table class="table table-striped small">
+        <thead align="center">
+        <tr>
+            <th>Контрагент</th>
+            <th>Договор</th>
+            <th>Этап</th>
+            {% for el in dates %}
+                <th>{{ el }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for el in return_data %}
+            <tr>
+                <td>{{ el.counterparty_name}}</td>
+                <td>{{ el.contract }}</td>
+                <td>{{ el.paymentstages_title }}</td>
+                {% for el2 in el.sums %}
+                    <td>{{ el2 }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        <tr>
+            <th></th>
+            <th></th>
+            <th>ИТОГО:</th>
+            {% for el in sum_list %}
+            <th>{{ el }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th> НАРАСТАЮЩИЙ ИТОГО:</th>
+            {% for el in sum_list_nac %}
+            <th>{{ el }}</th>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript" src={% static "js/start_and_stop_date.js" %}></script>
+{% endblock %}
